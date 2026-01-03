@@ -1,15 +1,16 @@
 import { createContext } from "react";
 import { defaultFlowState } from "./defaultFlowState";
 import type { FlowStateModel } from "../models/FlowStateModel";
+import type { FlowActionModel } from "../models/FlowActionModel";
 
 type FlowValueProps = {
   state: FlowStateModel,
-  setState: React.Dispatch<React.SetStateAction<FlowStateModel>>;
+  dispatch: React.Dispatch<FlowActionModel>;
 }
 
 const defaultFlowValue: FlowValueProps = {
   state: defaultFlowState,
-  setState: () => {},
+  dispatch: () => {},
 }
 
 export const FlowContext = createContext(defaultFlowValue);

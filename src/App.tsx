@@ -1,9 +1,6 @@
 import { useCallback } from "react";
 import {
   ReactFlow,
-  addEdge,
-  applyEdgeChanges,
-  applyNodeChanges,
   type Connection,
   type Edge,
   type EdgeChange,
@@ -17,54 +14,55 @@ import "./styles/index.css";
 import { AddNodeButton } from "./components/AddNodeButton/AddNodeButton";
 import { v4 as uuid } from "uuid";
 import { useFlowContext } from "./contexts/useFlowContext";
+import { FlowActions } from "./models/FlowActionModel";
 
 const nodeTypes = {
   dialogueNode: DialogueNode,
 };
 
 export default function App() {
-  const { state, setState } = useFlowContext();
+  const { state, dispatch } = useFlowContext();
 
   const onNodesChange = useCallback(
     (changes: NodeChange<Node>[]) =>
-      setState((prevState) => ({
-        ...prevState,
-        nodes: applyNodeChanges(changes, prevState.nodes),
-      })),
-    [setState]
+      dispatch({
+        type: FlowActions.UPDATE_NODES,
+        payload: changes,
+      }),
+    [dispatch]
   );
 
   const onEdgesChange = useCallback(
     (changes: EdgeChange<Edge>[]) =>
-      setState((prevState) => ({
-        ...prevState,
-        edges: applyEdgeChanges(changes, prevState.edges),
-      })),
-    [setState]
+      dispatch({
+        type: FlowActions.UPDATE_EDGES,
+        payload: changes,
+      }),
+    [dispatch]
   );
 
   const onConnect = useCallback(
     (params: Connection) =>
-      setState((prevState) => ({
-        ...prevState,
-        edges: addEdge(params, prevState.edges),
-      })),
-    [setState]
+      dispatch({
+        type: FlowActions.CONNECT_NODES,
+        payload: params,
+      }),
+    [dispatch]
   );
 
-  const addNode = () =>
-    setState((prevState) => ({
-      ...prevState,
-      nodes: [
-        ...prevState.nodes,
-        {
+  const addNode = useCallback(
+    () =>
+      dispatch({
+        type: FlowActions.ADD_NODE,
+        payload: {
           id: uuid(),
           type: "dialogueNode",
           position: { x: 0, y: 0 },
           data: { label: "" },
         },
-      ],
-    }));
+      }),
+    [dispatch]
+  );
 
   return (
     <>
