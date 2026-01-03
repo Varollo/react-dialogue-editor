@@ -1,0 +1,21 @@
+.dialogueNode {
+  background-color: #666;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.dialogueNode header {
+  background: #888;
+  height: 1rem;
+}
+
+.dialogueNode textarea {
+  resize: none;
+  background: none;
+  border: none;
+  margin: 0.5rem;
+
+  &:focus {
+    outline: none;
+  }
+}
