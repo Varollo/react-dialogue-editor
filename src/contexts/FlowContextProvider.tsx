@@ -8,7 +8,6 @@ type FlowContextProviderProps = {
 
 export function FlowContextProvider({ children }: FlowContextProviderProps) {
   const [state, setState] = useState(defaultFlowState);
-
   return (
     <FlowContext.Provider value={{ state, setState }}>
       {children}
