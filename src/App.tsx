@@ -58,7 +58,7 @@ export default function App() {
           id: uuid(),
           type: "dialogueNode",
           position: { x: 0, y: 0 },
-          data: { label: "" },
+          data: { actor: "", line: "" },
         },
       }),
     [dispatch]
