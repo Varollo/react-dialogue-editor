@@ -4,6 +4,11 @@ import {
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
+  type Connection,
+  type Edge,
+  type EdgeChange,
+  type Node,
+  type NodeChange,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { DialogueNode } from "./components/DialogueNode/DialogueNode";
@@ -16,22 +21,25 @@ const nodeTypes = {
   textUpdater: DialogueNode,
 };
 
+const defaultNodes: Node[] = [];
+const defaultEdges: Edge[] = [];
+
 export default function App() {
-  const [nodes, setNodes] = useState([]);
-  const [edges, setEdges] = useState([]);
+  const [nodes, setNodes] = useState(defaultNodes);
+  const [edges, setEdges] = useState(defaultEdges);
 
   const onNodesChange = useCallback(
-    (changes) =>
+    (changes: NodeChange<Node>[]) =>
       setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
     []
   );
   const onEdgesChange = useCallback(
-    (changes) =>
+    (changes: EdgeChange<Edge>[]) =>
       setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
     []
   );
   const onConnect = useCallback(
-    (params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
+    (params: Connection) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
     []
   );
 
