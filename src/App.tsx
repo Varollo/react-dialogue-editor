@@ -50,7 +50,7 @@ export default function App() {
         id: uuid(),
         type: "textUpdater",
         position: { x: 0, y: 0 },
-        data: { label: "Node 3" },
+        data: { label: "" },
       },
     ]);
 
