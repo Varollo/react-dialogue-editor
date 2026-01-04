@@ -7,3 +7,14 @@ body {
 
   overflow: hidden;
 }
+
+input,
+textarea {
+  resize: none;
+  background: none;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}

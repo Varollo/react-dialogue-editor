@@ -1,40 +1,5 @@
 .dialogueNode {
-  background-color: #666;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.1);
-}
-
-.dialogueNode header {
-  background: #888;
-  height: 1rem;
-}
-
-.dialogueNodeContent {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  margin: 0.5rem;
-}
-
-.dialogueNodeContent input,
-.dialogueNodeContent textarea {
-  resize: none;
-  background: none;
-  border: none;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.dialogueNodeContent input {
-  font-weight: bold;
-  border-bottom: 2px solid #888;
-  padding-bottom: 0.25rem;
-  opacity: 75%;
-}
-
-.dialogueNodeContent textarea {
-  padding: 0 0.5rem;
 }

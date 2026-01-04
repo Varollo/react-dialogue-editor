@@ -1,0 +1,15 @@
+.flowNode {
+  background-color: #666;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.flowNode header {
+  background: #888;
+  height: 1rem;
+}
+
+.flowNodeContent {
+  margin: 0.5rem;
+}

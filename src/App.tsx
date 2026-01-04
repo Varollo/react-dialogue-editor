@@ -15,9 +15,11 @@ import { AddNodeButton } from "./components/AddNodeButton/AddNodeButton";
 import { v4 as uuid } from "uuid";
 import { useFlowContext } from "./contexts/useFlowContext";
 import { FlowActions } from "./models/FlowActionModel";
+import { QuestionNode } from "./components/QuestionNode/QuestionNode";
 
 const nodeTypes = {
   dialogueNode: DialogueNode,
+  questionNode: QuestionNode,
 };
 
 export default function App() {
@@ -50,15 +52,29 @@ export default function App() {
     [dispatch]
   );
 
-  const addNode = useCallback(
+  // const addNode = useCallback(
+  //   () =>
+  //     dispatch({
+  //       type: FlowActions.ADD_NODE,
+  //       payload: {
+  //         id: uuid(),
+  //         type: "dialogueNode",
+  //         position: { x: 0, y: 0 },
+  //         data: { actor: "", line: "" },
+  //       },
+  //     }),
+  //   [dispatch]
+  // );
+
+  const addQuestionNode = useCallback(
     () =>
       dispatch({
         type: FlowActions.ADD_NODE,
         payload: {
           id: uuid(),
-          type: "dialogueNode",
+          type: "questionNode",
           position: { x: 0, y: 0 },
-          data: { actor: "", line: "" },
+          data: { actor: "", line: "", answers: [] },
         },
       }),
     [dispatch]
@@ -77,7 +93,16 @@ export default function App() {
           fitView
         />
       </div>
-      <AddNodeButton onClick={addNode} />
+      <div style={{
+        position: 'absolute',
+        right: '2rem',
+        bottom: '2rem',
+        display: 'flex',
+        gap: '0.5rem',
+      }}>
+        <AddNodeButton onClick={addQuestionNode} />
+        {/* <AddNodeButton onClick={addNode} /> */}
+      </div>
     </>
   );
 }
