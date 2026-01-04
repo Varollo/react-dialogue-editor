@@ -9,7 +9,7 @@ type FlowContextProviderProps = {
 
 export function FlowContextProvider({ children }: FlowContextProviderProps) {
   const [state, dispatch] = useReducer(flowReducer, defaultFlowState);
-  
+
   return (
     <FlowContext.Provider value={{ state, dispatch }}>
       {children}

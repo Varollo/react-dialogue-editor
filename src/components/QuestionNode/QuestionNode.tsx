@@ -10,6 +10,8 @@ import { useFlowContext } from "../../contexts/useFlowContext";
 import styles from "./QuestionNode.module.css";
 import { showMessage } from "../../adapters/showMessage";
 import { AnswerInput } from "../AnswerInput/AnswerInput";
+import { GerenicButton } from "../AddNodeButton/GenericButton";
+import { PlusIcon } from "lucide-react";
 
 type AnswerProps = {
   id: string;
@@ -26,7 +28,6 @@ export function QuestionNode({
   id,
   data: defaultData,
 }: NodeProps<Node<QuestionNodeData>>) {
-  const [answers, setAnswers] = useState(defaultData.answers);
   const { dispatch } = useFlowContext();
   const [data, setData] = useState(defaultData);
 
@@ -38,28 +39,22 @@ export function QuestionNode({
     handleDataChange(event.target.name, event.target.value);
   }
 
-  function handleAnswerChange(
+  function handleAnswerBlur(
     event: React.FocusEvent<HTMLInputElement, Element>
   ): void {
     const id = event.target.id;
     const value = event.target.value;
 
-    /* IF value is empty, REMOVE entry */
     if (!value) {
-      setAnswers((prevState) => {
-        const newArray = [...prevState];
-        return newArray.filter((a) => a.id !== id);
-      });
-    /* ELSE edit text */
-    } else {
-      setAnswers((prevState) => {
-        const newArray = [...prevState];
-        const index = newArray.findIndex((a) => a.id === id);
-        newArray[index] = { ...newArray[index], text: value };
-        return newArray;
-      });
-      handleDataChange('answers', answers);
+      deleteAnswer(id);
     }
+  }
+
+  function handleAnswerChange(event: ChangeEvent<HTMLInputElement>) {
+    const id = event.target.id;
+    const value = event.target.value;
+
+    updateAnswer(id, value);
   }
 
   function handleDataChange(key: string, value: unknown): void {
@@ -77,14 +72,13 @@ export function QuestionNode({
     ) as HTMLInputElement;
 
     if (answerInput.value) {
-      setAnswers((prevState) => [
-        ...prevState,
+      handleDataChange("answers", [
+        ...data.answers,
         {
           id: uuid(),
           text: answerInput.value,
         },
       ]);
-      handleDataChange('answers', answers);
       answerInput.value = "";
     } else {
       showMessage.warn("Can't add empty answer.");
@@ -95,8 +89,25 @@ export function QuestionNode({
     event.preventDefault();
   }
 
+  function updateAnswer(id: string, text: string) {
+    const newArray = [...data.answers];
+    const index = newArray.findIndex((a) => a.id === id);
+    newArray[index] = { ...newArray[index], text };
+    handleDataChange("answers", newArray);
+  }
+
+  function deleteAnswer(id: string) {
+    const newArray = [...data.answers].filter((a) => a.id !== id);
+    handleDataChange("answers", newArray);
+  }
+
+  function handleCloseNode(): void {
+    
+  }
+
   return (
-    <FlowNode>
+    <FlowNode onClose={handleCloseNode}>
+      <div className={styles.notch1} />
       <div className={styles.dialogueContainer}>
         <ActorInput value={data.actor} onChange={handleActorChange} />
         <LineInput value={data.line} onChange={handleLineChange} />
@@ -110,29 +121,45 @@ export function QuestionNode({
           autoComplete="off"
           spellCheck={false}
         />
-        <button type="submit">+</button>
+        <GerenicButton type="submit">
+          <PlusIcon />
+        </GerenicButton>
       </form>
       <Handle
         type="target"
         position={Position.Left}
-        style={{ top: "5.65rem" }}
+        style={{ top: "6.2rem" }}
       />
 
-      {answers.length == 0 && (
-        <Handle type="source" position={Position.Right} />
+      {data.answers.length == 0 && (
+        <>
+          <div className={styles.notch2} />
+          <Handle
+            type="source"
+            position={Position.Right}
+            style={{ top: "6.2rem" }}
+          />
+        </>
       )}
       <div className={styles.answerContainer}>
-        {answers.map((answer, i) => (
+        {data.answers.map((answer, i) => (
           <Fragment key={answer.id}>
             <AnswerInput
               id={answer.id}
-              defaultValue={answer.text}
-              onBlur={handleAnswerChange}
+              onBlur={handleAnswerBlur}
+              onDelete={deleteAnswer}
+              onChange={handleAnswerChange}
+              value={
+                data.answers[data.answers.findIndex((a) => a.id === answer.id)]
+                  .text
+              }
             />
             <Handle
               type="source"
               position={Position.Right}
-              style={{ top: `${12.1 + (answers.length - i - 1) * 2.29}rem` }}
+              style={{
+                top: `${13.2 + (data.answers.length - i - 1) * 2.17}rem`,
+              }}
               id={answer.id}
             />
           </Fragment>

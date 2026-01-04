@@ -22,15 +22,10 @@
   padding: 0.25rem 0.5rem;
 }
 
-.questionContainer button {
-  border-radius: 50%;
-  border: none;
-  width: 1.5rem;
-  height: 1.5rem;
-}
 
 .answerContainer {
   margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
 }
@@ -45,4 +40,24 @@
   border-bottom: 0.2rem solid #444;
   padding-right: 1rem;
   color: #111;
+}
+
+.notch1,
+.notch2 {
+  width: 0.6rem;
+  height: 1.5rem;
+  position: absolute;
+  background: #666;
+  top: 5.4rem;
+  border-bottom: 0.15rem solid #555;
+}
+
+.notch1 {
+  transform: translateX(-100%);
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.notch2 {
+  left: 100%;
+  border-radius: 0 0.5rem 0.5rem 0;
 }

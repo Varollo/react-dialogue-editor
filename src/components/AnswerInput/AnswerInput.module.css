@@ -1,11 +1,21 @@
 .answerInput {
   margin: 0.5rem 0 0 0.5rem;
-  border-radius: 0.5rem 0 0 0.5rem;
-  text-align: right;
-  line-height: 150%;
+  border-radius: 0.5rem;
   background: #555;
   min-height: 1.5rem;
   border-bottom: 0.2rem solid #444;
   padding-right: 1rem;
+  display: flex;
+  align-items: center;
+  width: 92.5%;
+}
+
+.answerInput button {
+  margin-left: 0.5rem;
+}
+
+.answerInput input {
+  text-align: right;
+  line-height: 150%;
   color: #111;
 }

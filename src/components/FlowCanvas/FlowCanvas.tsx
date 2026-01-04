@@ -8,17 +8,16 @@ import {
   type NodeChange,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { DialogueNode } from "../DialogueNode/DialogueNode";
 
 import "../../styles/index.css";
-import { AddNodeButton } from "../AddNodeButton/AddNodeButton";
+import { GerenicButton } from "../AddNodeButton/GenericButton";
 import { v4 as uuid } from "uuid";
 import { useFlowContext } from "../../contexts/useFlowContext";
 import { FlowActions } from "../../models/FlowActionModel";
 import { QuestionNode } from "../QuestionNode/QuestionNode";
+import { PlusIcon } from "lucide-react";
 
 const nodeTypes = {
-  dialogueNode: DialogueNode,
   questionNode: QuestionNode,
 };
 
@@ -52,20 +51,6 @@ export function FlowCanvas() {
     [dispatch]
   );
 
-  // const addNode = useCallback(
-  //   () =>
-  //     dispatch({
-  //       type: FlowActions.ADD_NODE,
-  //       payload: {
-  //         id: uuid(),
-  //         type: "dialogueNode",
-  //         position: { x: 0, y: 0 },
-  //         data: { actor: "", line: "" },
-  //       },
-  //     }),
-  //   [dispatch]
-  // );
-
   const addQuestionNode = useCallback(
     () =>
       dispatch({
@@ -93,15 +78,18 @@ export function FlowCanvas() {
           fitView
         />
       </div>
-      <div style={{
-        position: 'absolute',
-        right: '2rem',
-        bottom: '2rem',
-        display: 'flex',
-        gap: '0.5rem',
-      }}>
-        <AddNodeButton onClick={addQuestionNode} />
-        {/* <AddNodeButton onClick={addNode} /> */}
+      <div
+        style={{
+          position: "absolute",
+          right: "2rem",
+          bottom: "2rem",
+          display: "flex",
+          gap: "0.5rem",
+        }}
+      >
+        <GerenicButton size="3rem" onClick={addQuestionNode}>
+          <PlusIcon />
+        </GerenicButton>
       </div>
     </>
   );
