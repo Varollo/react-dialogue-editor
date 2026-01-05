@@ -14,6 +14,13 @@ export function flowReducer(state: FlowStateModel, action: FlowActionModel): Flo
       };
     }
 
+    case FlowActions.REMOVE_NODE: {
+      return {
+        ...state,
+        nodes: state.nodes.filter(n => n.id !== action.payload.id)
+      }
+    }
+
     case FlowActions.UPDATE_NODES: {
       return {
         ...state,
@@ -40,7 +47,7 @@ export function flowReducer(state: FlowStateModel, action: FlowActionModel): Flo
 
       const newList = [...state.nodes];
       newList[index].data = action.payload.data;
-      
+
       return {
         ...state,
         nodes: newList,

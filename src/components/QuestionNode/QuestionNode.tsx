@@ -102,7 +102,7 @@ export function QuestionNode({
   }
 
   function handleCloseNode(): void {
-    
+    dispatch({ type: FlowActions.REMOVE_NODE, payload: { id } });
   }
 
   return (

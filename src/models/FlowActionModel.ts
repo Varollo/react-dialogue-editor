@@ -2,6 +2,7 @@ import type { Connection, Edge, EdgeChange, Node, NodeChange } from "@xyflow/rea
 
 export const FlowActions = {
   ADD_NODE: 'ADD_NODE',
+  REMOVE_NODE: 'REMOVE_NODE',
   UPDATE_NODES: 'UPDATE_NODES',
   UPDATE_EDGES: 'UPDATE_EDGES',
   CONNECT_NODES: 'CONNECT_NODES',
@@ -13,6 +14,11 @@ export type FlowActionModel =
   {
     type: typeof FlowActions.ADD_NODE;
     payload: Node;
+  } |
+
+  {
+    type: typeof FlowActions.REMOVE_NODE;
+    payload: { id: string };
   } |
 
   {
