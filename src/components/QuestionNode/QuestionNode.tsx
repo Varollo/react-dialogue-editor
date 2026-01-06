@@ -149,18 +149,15 @@ export function QuestionNode({
               onBlur={handleAnswerBlur}
               onDelete={deleteAnswer}
               onChange={handleAnswerChange}
-              value={
-                data.answers[data.answers.findIndex((a) => a.id === answer.id)]
-                  .text
-              }
+              value={answer.text}
             />
             <Handle
+              id={answer.id}
               type="source"
               position={Position.Right}
               style={{
-                top: `${13.2 + (data.answers.length - i - 1) * 2.17}rem`,
+                top: `${13.2 + i * 2.17}rem`,
               }}
-              id={answer.id}
             />
           </Fragment>
         ))}
