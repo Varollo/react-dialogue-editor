@@ -1,4 +1,5 @@
 import type { Connection, Edge, EdgeChange, Node, NodeChange } from "@xyflow/react";
+import type { FlowStateModel } from "./FlowStateModel";
 
 export const FlowActions = {
   ADD_NODE: 'ADD_NODE',
@@ -7,6 +8,7 @@ export const FlowActions = {
   UPDATE_EDGES: 'UPDATE_EDGES',
   CONNECT_NODES: 'CONNECT_NODES',
   UPDATE_NODE_DATA: 'UPDATE_NODE_DATA',
+  SET_STATE: 'SET_STATE',
 } as const;
 export type FlowActions = (typeof FlowActions)[keyof typeof FlowActions];
 
@@ -39,4 +41,9 @@ export type FlowActionModel =
   {
     type: typeof FlowActions.UPDATE_NODE_DATA;
     payload: { id: string, data: Record<string, unknown> }
+  } |
+
+  {
+    type: typeof FlowActions.SET_STATE;
+    payload: FlowStateModel;
   }

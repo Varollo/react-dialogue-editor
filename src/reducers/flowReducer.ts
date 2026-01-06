@@ -54,6 +54,10 @@ export function flowReducer(state: FlowStateModel, action: FlowActionModel): Flo
       }
     }
 
+    case FlowActions.SET_STATE: {
+      return action.payload;
+    }
+
     default:
       return state;
   }
