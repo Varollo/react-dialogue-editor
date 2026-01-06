@@ -1,0 +1,42 @@
+.toolbar {
+  width: 100vw;
+  height: 2rem;
+  background: #666;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5) inset;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.toolbar ul {
+  padding-left: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.toolbar li {
+  list-style-type: none;
+}
+
+.toolbar button {
+  margin: 0;
+  background: none;
+  border: none;
+  border-left: .15rem solid #333;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .25rem;
+  transition: color .1s ease-in-out;
+}
+
+.toolbar button svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.toolbar button:hover {
+  color: #333;
+}
